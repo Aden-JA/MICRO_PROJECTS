@@ -1,0 +1,19 @@
+=== Traffic Light Controller Simulation ===
+VCD info: dumpfile traffic_light.vcd opened for output.
+
+Time=0      reset=1  red=1  green=0  yellow=0
+Time=20000  reset=0  red=1  green=0  yellow=0
+Time=75000  reset=0  red=0  green=1  yellow=0
+Time=135000 reset=0  red=0  green=0  yellow=1
+Time=155000 reset=0  red=1  green=0  yellow=0
+Time=215000 reset=0  red=0  green=1  yellow=0
+
+$finish called at 220000 (1ps)
+
+=== State Transitions Explained ===
+Time 0-20000   → Reset active, FSM held in RED
+Time 20000     → Reset released, FSM starts running
+Time 20-75000  → RED active (6 clock cycles = 60ns)
+Time 75-135000 → GREEN active (6 clock cycles = 60ns)
+Time 135-155000→ YELLOW active (2 clock cycles = 20ns)
+Time 155000+   → Back to RED, cycle repeats
