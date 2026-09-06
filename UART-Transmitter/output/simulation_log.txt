@@ -1,0 +1,20 @@
+=== UART Transmitter Testbench ===
+CLK: 50000000 Hz | BAUD: 9600 | Period: 104166 ns
+
+Sending: H E L L O
+---------------------------
+Sent: H (0x48)
+Sent: E (0x45)
+Sent: L (0x4C)
+Sent: L (0x4C)
+Sent: O (0x4F)
+
+Edge Cases:
+---------------------------
+Sent: 0x00 (all zeros)
+Sent: 0xFF (all ones)
+Sent: 0xAA (alternating)
+
+=== Simulation Complete ===
+uart_tx_tb.v:92: $finish called at 9166196000 (1ps)
+
