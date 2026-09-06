@@ -69,17 +69,18 @@ Baud divider auto-calculated: `DIVIDER = (CLK_FREQ / BAUD_RATE) - 1 = 5207`
 ## FSM State Diagram
 
 ```
-        ┌─────────────────────────────────────────┐
-        ↓                                         │
-      IDLE ──(send=1)──► START ──► DATA (×8 bits) ┤
-                                                  │
-                         ┌─────(PARITY≠0)─────► PAR
-                         │                       │
-                         └──(PARITY=0)──► STOP1 ◄┘
-                                          │
-                          ┌──(STOP_BITS=2)┘
-                          ↓
-                        STOP2 ──► IDLE
+       
+      IDLE ──(send=1)──► START ──► DATA (×8 bits) 
+                                     │
+                (PARITY = 0[none])──┤ ├──(PARITY = 1or2[odd/even])
+                        │                        ↓
+                        │                       PAR
+                        └────────► STOP1 ◄───────┘
+                                     │
+                               (STOP_BITS=2)
+                                     ↓
+                                   STOP2 ──► IDLE
+
 ```
 
 | State | tx Line | Duration | Action |
@@ -98,8 +99,8 @@ Baud divider auto-calculated: `DIVIDER = (CLK_FREQ / BAUD_RATE) - 1 = 5207`
 ```
 IDLE  START  D0  D1  D2  D3  D4  D5  D6  D7  STOP
 HIGH   LOW   b0  b1  b2  b3  b4  b5  b6  b7  HIGH
-       │←————————— 104.17µs per bit ————————————→│
 
+104.17µs per bit
 Frame = 10 bit periods × 104.17µs = 1.04ms per byte @ 9600 baud
 ```
 
@@ -212,6 +213,3 @@ uart_tx #(
 - Baud rate: 9600 (default), any rate supported via parameters
 - Bit order: LSB first per UART standard
 
----
-
-*Project 3 — Semester 3 | EEE Hardware Portfolio*
