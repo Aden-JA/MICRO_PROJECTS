@@ -1,0 +1,39 @@
+VCD info: dumpfile fifo.vcd opened for output.
+=========================================
+      FIFO VERIFICATION TESTBENCH
+  DEPTH=16 | DATA_WIDTH=8 bits
+=========================================
+
+[TEST 1] Write 8 bytes, read back ΓÇö verify FIFO order
+  READ[0] =   0  (expected   0)  PASS
+  READ[1] =  10  (expected  10)  PASS
+  READ[2] =  20  (expected  20)  PASS
+  READ[3] =  30  (expected  30)  PASS
+  READ[4] =  40  (expected  40)  PASS
+  READ[5] =  50  (expected  50)  PASS
+  READ[6] =  60  (expected  60)  PASS
+  READ[7] =  70  (expected  70)  PASS
+
+[TEST 2] Fill FIFO to FULL (16 bytes)
+  full  = 1  (expected 1)  PASS
+  empty = 0  (expected 0)  PASS
+
+[TEST 5] Overflow attempt ΓÇö write when FULL
+  full still = 1  (expected 1)  PASS
+
+[TEST 3] Empty FIFO completely (16 reads)
+  empty = 1  (expected 1)  PASS
+  full  = 0  (expected 0)  PASS
+
+[TEST 6] Underflow attempt ΓÇö read when EMPTY
+  empty still = 1  (expected 1)  PASS
+
+[TEST 4] Simultaneous read and write
+  Simultaneous: data_out=0xaa  (expected 0xaa)  PASS
+  Follow-up:    data_out=0xbb  (expected 0xbb)  PASS
+
+=========================================
+         VERIFICATION COMPLETE
+=========================================
+
+fifo_tb.v:228: $finish called at 1910000 (1ps)
